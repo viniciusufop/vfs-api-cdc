@@ -1,5 +1,6 @@
 package br.com.vfs.api.cdc.author;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class NewAuthor implements Serializable {
 
+    @Getter
     @NotBlank
     @Email
     private String email;
