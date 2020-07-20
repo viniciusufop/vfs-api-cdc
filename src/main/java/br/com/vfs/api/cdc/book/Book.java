@@ -44,4 +44,8 @@ public class Book {
     @NotNull
     @ManyToOne
     private Author author;
+
+    public BookBasic toBookBasic() {
+        return new BookBasic(id, title);
+    }
 }

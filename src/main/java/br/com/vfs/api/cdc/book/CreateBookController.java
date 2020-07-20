@@ -15,7 +15,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/book")
-public class BookController {
+public class CreateBookController {
 
     private final BookRepository bookRepository;
     private final AuthorRepository authorRepository;
