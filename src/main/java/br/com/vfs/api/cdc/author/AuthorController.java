@@ -21,7 +21,7 @@ public class AuthorController {
 
     @InitBinder("newAuthor")
     public void init(WebDataBinder dataBinder){
-        dataBinder.setValidator(new ValidatedDuplicateEmailAuthor(authorRepository));
+        dataBinder.addValidators(new ValidatedDuplicateEmailAuthor(authorRepository));
     }
 
     @PostMapping

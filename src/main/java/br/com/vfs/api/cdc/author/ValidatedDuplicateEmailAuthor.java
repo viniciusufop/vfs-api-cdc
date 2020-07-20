@@ -18,7 +18,7 @@ public class ValidatedDuplicateEmailAuthor implements Validator {
     public void validate(Object target, Errors errors) {
         var newAuthor = (NewAuthor) target;
         if(authorRepository.existsByEmail(newAuthor.getEmail())){
-            errors.rejectValue("email", null,
+            errors.rejectValue("email", "duplicate-author-email",
                     String.format("Email author %s existing in database", newAuthor.getEmail()));
         }
     }
