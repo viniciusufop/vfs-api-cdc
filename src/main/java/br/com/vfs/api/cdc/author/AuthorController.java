@@ -2,7 +2,6 @@ package br.com.vfs.api.cdc.author;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -18,11 +17,6 @@ public class AuthorController {
 
 
     private final AuthorRepository authorRepository;
-
-    @InitBinder("newAuthor")
-    public void init(WebDataBinder dataBinder){
-        dataBinder.addValidators(new ValidatedDuplicateEmailAuthor(authorRepository));
-    }
 
     @PostMapping
     @ResponseStatus(OK)

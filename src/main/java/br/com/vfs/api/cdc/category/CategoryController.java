@@ -2,7 +2,6 @@ package br.com.vfs.api.cdc.category;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -17,11 +16,6 @@ import static org.springframework.http.HttpStatus.OK;
 public class CategoryController {
 
     private final CategoryRepository categoryRepository;
-
-    @InitBinder("newCategory")
-    public void init(final WebDataBinder dataBinder){
-        dataBinder.addValidators(new ValidatedDuplicateNameCategory(categoryRepository));
-    }
 
     @PostMapping
     @ResponseStatus(OK)

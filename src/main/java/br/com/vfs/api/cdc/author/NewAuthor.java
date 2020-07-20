@@ -1,5 +1,6 @@
 package br.com.vfs.api.cdc.author;
 
+import br.com.vfs.api.cdc.shared.UniqueValue;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class NewAuthor implements Serializable {
     @Getter
     @NotBlank
     @Email
+    @UniqueValue(domainClass = Author.class, fieldName = "email")
     private String email;
     @NotBlank
     private String name;
