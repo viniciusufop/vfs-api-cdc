@@ -8,4 +8,9 @@ import lombok.RequiredArgsConstructor;
 public class BookBasic {
     private final Long id;
     private final String title;
+
+    public BookBasic(final Book book) {
+        this.id = book.getId();
+        this.title = book.getTitle();
+    }
 }
