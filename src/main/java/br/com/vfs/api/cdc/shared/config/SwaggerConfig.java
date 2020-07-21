@@ -1,7 +1,6 @@
-package br.com.vfs.api.cdc.config;
+package br.com.vfs.api.cdc.shared.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.BuildProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
