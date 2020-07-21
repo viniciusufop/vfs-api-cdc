@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 @Getter
 @Builder
 public class BookDetail {
+    private final Long id;
     private final String title;
     private final String resume;
     private final String summary;
@@ -19,6 +20,7 @@ public class BookDetail {
     private final AuthorDetail author;
 
     public BookDetail(final Book book) {
+        this.id = book.getId();
         this.title = book.getTitle();
         this.resume = book.getResume();
         this.summary = book.getSummary();
