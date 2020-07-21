@@ -1,6 +1,6 @@
 package br.com.vfs.api.cdc.category;
 
-import br.com.vfs.api.cdc.shared.UniqueValue;
+import br.com.vfs.api.cdc.shared.annotations.UniqueValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

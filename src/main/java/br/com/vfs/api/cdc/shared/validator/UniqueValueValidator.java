@@ -1,5 +1,6 @@
-package br.com.vfs.api.cdc.shared;
+package br.com.vfs.api.cdc.shared.validator;
 
+import br.com.vfs.api.cdc.shared.annotations.UniqueValue;
 import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;

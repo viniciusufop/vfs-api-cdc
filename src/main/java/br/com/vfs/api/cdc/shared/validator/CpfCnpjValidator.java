@@ -1,5 +1,6 @@
-package br.com.vfs.api.cdc.shared;
+package br.com.vfs.api.cdc.shared.validator;
 
+import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CNPJValidator;
 import org.hibernate.validator.internal.constraintvalidators.hv.br.CPFValidator;
 

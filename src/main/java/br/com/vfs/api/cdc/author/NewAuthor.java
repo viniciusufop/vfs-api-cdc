@@ -1,6 +1,6 @@
 package br.com.vfs.api.cdc.author;
 
-import br.com.vfs.api.cdc.shared.UniqueValue;
+import br.com.vfs.api.cdc.shared.annotations.UniqueValue;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

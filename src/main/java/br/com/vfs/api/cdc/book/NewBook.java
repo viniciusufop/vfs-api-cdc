@@ -2,7 +2,7 @@ package br.com.vfs.api.cdc.book;
 
 import br.com.vfs.api.cdc.author.AuthorRepository;
 import br.com.vfs.api.cdc.category.CategoryRepository;
-import br.com.vfs.api.cdc.shared.UniqueValue;
+import br.com.vfs.api.cdc.shared.annotations.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;

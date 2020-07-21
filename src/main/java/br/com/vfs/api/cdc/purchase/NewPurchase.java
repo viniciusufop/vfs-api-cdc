@@ -1,6 +1,6 @@
 package br.com.vfs.api.cdc.purchase;
 
-import br.com.vfs.api.cdc.shared.CpfCnjp;
+import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
