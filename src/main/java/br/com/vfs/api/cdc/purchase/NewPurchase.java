@@ -4,6 +4,7 @@ import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,4 +36,7 @@ public class NewPurchase {
     private Long phone;
     @NotNull
     private Long cep;
+    @Valid
+    @NotNull
+    private NewCart newCart;
 }
