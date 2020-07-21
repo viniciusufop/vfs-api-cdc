@@ -1,6 +1,5 @@
-package br.com.vfs.api.cdc.config;
+package br.com.vfs.api.cdc.shared.errors;
 
-import br.com.vfs.api.cdc.shared.errors.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

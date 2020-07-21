@@ -1,4 +1,4 @@
-package br.com.vfs.api.cdc.config;
+package br.com.vfs.api.cdc.shared.errors;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
