@@ -3,6 +3,7 @@ package br.com.vfs.api.cdc.purchase;
 import br.com.vfs.api.cdc.book.BookRepository;
 import br.com.vfs.api.cdc.country.CountryRepository;
 import br.com.vfs.api.cdc.country.CountryStateRepository;
+import br.com.vfs.api.cdc.coupon.CouponRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,11 +24,13 @@ public class PurchaseController {
     private final CountryStateRepository countryStateRepository;
     private final BookRepository bookRepository;
     private final PurchaseRepository purchaseRepository;
+    private final CouponRepository couponRepository;
 
     @InitBinder("newPurchase")
     public void init(final WebDataBinder dataBinder){
         dataBinder.addValidators(new IsNullCountryStateValidator(countryRepository, countryStateRepository));
         dataBinder.addValidators(new TotalNewCartValidator(bookRepository));
+        dataBinder.addValidators(new IsCouponExpirationValidator(couponRepository));
     }
 
     @PostMapping
@@ -35,7 +38,7 @@ public class PurchaseController {
     @Transactional
     public String create(@RequestBody @Valid final NewPurchase newPurchase){
         log.info("M=create, newPurchase={}", newPurchase);
-        final var purchase = newPurchase.toModel(countryRepository, countryStateRepository, bookRepository);
+        final var purchase = newPurchase.toModel(countryRepository, countryStateRepository, bookRepository, couponRepository);
         return String.format("/api/purchase/%d",purchaseRepository.save(purchase).getId());
     }
 }

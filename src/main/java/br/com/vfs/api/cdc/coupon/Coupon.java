@@ -38,4 +38,8 @@ public class Coupon {
         this.discount = discount;
         this.validate = validate;
     }
+
+    public boolean expired(){
+        return validate.compareTo(LocalDateTime.now()) < 0;
+    }
 }

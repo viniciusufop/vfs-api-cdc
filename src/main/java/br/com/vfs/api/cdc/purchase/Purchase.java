@@ -2,6 +2,7 @@ package br.com.vfs.api.cdc.purchase;
 
 import br.com.vfs.api.cdc.country.Country;
 import br.com.vfs.api.cdc.country.CountryState;
+import br.com.vfs.api.cdc.coupon.Coupon;
 import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
 import lombok.*;
 import org.springframework.util.Assert;
@@ -50,6 +51,8 @@ public class Purchase {
     @ElementCollection
     @CollectionTable(name = "purchase_items")
     private Set<Item> items;
+    @ManyToOne
+    private Coupon coupon;
 
     public void setCountryState(CountryState countryState) {
         Assert.isTrue(countryState.countryStateIsACountry(country.getId()), "Country state not associate a Country");

@@ -4,7 +4,10 @@ import br.com.vfs.api.cdc.book.BookRepository;
 import br.com.vfs.api.cdc.country.CountryRepository;
 import br.com.vfs.api.cdc.country.CountryState;
 import br.com.vfs.api.cdc.country.CountryStateRepository;
+import br.com.vfs.api.cdc.coupon.Coupon;
+import br.com.vfs.api.cdc.coupon.CouponRepository;
 import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
+import br.com.vfs.api.cdc.shared.annotations.ExistElement;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -45,13 +48,18 @@ public class NewPurchase {
     @Valid
     @NotNull
     private NewCart newCart;
+    @ExistElement(domainClass = Coupon.class)
+    private Long idCoupon;
 
     public Purchase toModel(final CountryRepository countryRepository,
                             final CountryStateRepository countryStateRepository,
-                            final BookRepository bookRepository){
+                            final BookRepository bookRepository,
+                            final CouponRepository couponRepository){
         final var country = countryRepository.findById(idCountry)
                 .orElseThrow(()-> new IllegalArgumentException("country not found"));
         final var countryStateOptional = findCountryState(countryStateRepository);
+        final var coupon = couponRepository.findById(idCoupon)
+                .orElseThrow(()-> new IllegalArgumentException("coupon not found"));
         final var purchase = Purchase.builder()
                 .email(email)
                 .firstName(firstName)
@@ -64,6 +72,7 @@ public class NewPurchase {
                 .phone(phone)
                 .cep(cep)
                 .items(newCart.getModel(bookRepository))
+                .coupon(coupon)
                 .build();
         countryStateOptional.ifPresent(purchase::setCountryState);
         return purchase;
