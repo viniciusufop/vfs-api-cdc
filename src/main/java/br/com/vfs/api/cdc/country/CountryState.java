@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -28,5 +29,9 @@ public class CountryState {
     public CountryState(@NotBlank String name, @NotNull Country country) {
         this.name = name;
         this.country = country;
+    }
+
+    public boolean countryStateIsACountry(final Long idCountry){
+        return Objects.nonNull(idCountry) && country.getId().equals(idCountry);
     }
 }

@@ -27,4 +27,10 @@ public class NewItem {
         if(bookOptional.isEmpty()) return BigDecimal.ZERO;
         return bookOptional.get().getPrice().multiply(new BigDecimal(quantity));
     }
+
+    public Item toModel(final BookRepository bookRepository) {
+        final var book = bookRepository.findById(idBook)
+                .orElseThrow(() -> new IllegalArgumentException("book not found"));
+        return new Item(book, book.getTitle(), quantity, book.getPrice());
+    }
 }

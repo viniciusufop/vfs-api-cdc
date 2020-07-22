@@ -32,11 +32,4 @@ public class Country {
     public boolean existCountryStates(){
         return !CollectionUtils.isEmpty(countryStates);
     }
-
-    public boolean countryStateAssociate(final Long idCountryState){
-        return existCountryStates() && countryStates
-                .stream()
-                .map(CountryState::getId)
-                .noneMatch(idCountryState::equals);
-    }
 }
