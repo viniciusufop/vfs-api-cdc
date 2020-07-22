@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/purchase")
-public class PurchaseController {
+public class CreatePurchaseController {
 
     private final CountryRepository countryRepository;
     private final CountryStateRepository countryStateRepository;
