@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @Slf4j
 @RestController
@@ -31,12 +31,11 @@ public class PurchaseController {
     }
 
     @PostMapping
-    @ResponseStatus(OK)
+    @ResponseStatus(CREATED)
     @Transactional
     public String create(@RequestBody @Valid final NewPurchase newPurchase){
         log.info("M=create, newPurchase={}", newPurchase);
         final var purchase = newPurchase.toModel(countryRepository, countryStateRepository, bookRepository);
-        purchaseRepository.save(purchase);
-        return "Success create purchase";
+        return String.format("/api/purchase/%d",purchaseRepository.save(purchase).getId());
     }
 }
