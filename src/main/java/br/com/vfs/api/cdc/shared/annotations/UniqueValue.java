@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface UniqueValue {
 
-    String message() default "{br.com.vfs.api.cdc.beanvalidation.uniquevalue}";
+    String message() default "{br.com.vfs.api.cdc.bean-validation.unique-value}";
 
     Class<?>[] groups() default {};
 

@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface ExistElement {
 
-    String message() default "{br.com.vfs.api.cdc.beanvalidation.existElement}";
+    String message() default "{br.com.vfs.api.cdc.bean-validation.exist-element}";
 
     Class<?>[] groups() default {};
 

@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 public @interface CpfCnjp {
 
-    String message() default "{br.com.vfs.api.cdc.beanvalidation.cpfcnpj}";
+    String message() default "{br.com.vfs.api.cdc.bean-validation.cpf-cnpj}";
 
     Class<?>[] groups() default {};
 
