@@ -7,7 +7,7 @@ script:
   - ./gradlew -Dscan=true build
 
 after_success:
-  - ./gradlew check jacocoTestReport coveralls
+  - ./gradlew jacocoTestReport coveralls
 
 after_failure:
   - ./gradlew clean check --debug
