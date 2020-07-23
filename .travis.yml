@@ -3,15 +3,11 @@ language: java
 jdk:
   - oraclejdk13
 
-addons:
-  coverity_scan:
-    project:
-      name: "viniciusufop/vfs-api-cdc"
-      description: "Build submitted via Travis CI"
-    notification_email: vinicius_ufop@yahoo.com.br
-    build_command_prepend: "./gradlew clean"
-    build_command:   "./gradlew build -x test"
-    branch_pattern: coverity_scan
-
 script:
-  - ./gradlew test
+  - ./gradlew -Dscan=true build
+
+after_success:
+  - ./gradlew check jacocoTestReport coveralls
+
+after_failure:
+  - ./gradlew clean check --debug
