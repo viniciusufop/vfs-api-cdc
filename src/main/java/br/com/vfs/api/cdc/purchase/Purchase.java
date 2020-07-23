@@ -4,11 +4,25 @@ import br.com.vfs.api.cdc.country.Country;
 import br.com.vfs.api.cdc.country.CountryState;
 import br.com.vfs.api.cdc.coupon.Coupon;
 import br.com.vfs.api.cdc.shared.annotations.CpfCnjp;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity

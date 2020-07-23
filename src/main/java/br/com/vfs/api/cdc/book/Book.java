@@ -2,11 +2,25 @@ package br.com.vfs.api.cdc.book;
 
 import br.com.vfs.api.cdc.author.Author;
 import br.com.vfs.api.cdc.category.Category;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -28,7 +42,7 @@ public class Book {
     private String resume;
     private String summary;
     @NotNull
-    @Min(20)
+    @DecimalMin("20.00")
     private BigDecimal price;
     @NotNull
     @Min(100)
