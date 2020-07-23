@@ -27,7 +27,6 @@ import static java.time.temporal.ChronoField.MONTH_OF_YEAR;
 import static java.time.temporal.ChronoField.YEAR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -42,6 +41,10 @@ public class ControllerTest extends TestContainerMysqlTest {
     private static final String URL_AUTHOR = "/api/author";
     private static final String URL_CATEGORY = "/api/category";
     private static final String URL_BOOK = "/api/book";
+    private static final String URL_COUNTRY = "/api/country";
+    private static final String URL_COUNTRY_STATE = "/api/country-state";
+    private static final String URL_COUPON = "/api/coupon";
+    private static final String URL_PURCHASE = "/api/purchase";
     private static final DateTimeFormatter DATE_FORMAT = new DateTimeFormatterBuilder()
             .appendValue(YEAR, 4, 10, SignStyle.EXCEEDS_PAD)
             .appendLiteral('-')
@@ -53,6 +56,7 @@ public class ControllerTest extends TestContainerMysqlTest {
             .appendLiteral(":")
             .appendValue(MINUTE_OF_HOUR, 2)
             .toFormatter();
+
     @Autowired private MockMvc mvc;
     @Autowired private ObjectMapper objectMapper;
 
@@ -165,5 +169,77 @@ public class ControllerTest extends TestContainerMysqlTest {
                 .accept(APPLICATION_JSON);
         final var resultFind = mvc.perform(builder).andExpect(status().isOk()).andReturn();
         assertFalse(resultFind.getResponse().getContentAsString().isBlank(), "Return book by id");
+    }
+
+    @Test
+    @Order(9)
+    @DisplayName("create a new country")
+    void testCountryOne() throws Exception {
+        final var builder = post(URL_COUNTRY)
+                .content("{ \"name\":\"Brasil\" }")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON);
+        final var resultCreated = mvc.perform(builder).andExpect(status().isOk()).andReturn();
+        assertEquals("Success create country",
+                resultCreated.getResponse().getContentAsString(),
+                "Invalid message return");
+    }
+
+    @Test
+    @Order(10)
+    @DisplayName("create a new country state")
+    void testCountryStateOne() throws Exception {
+        final var builder = post(URL_COUNTRY_STATE)
+                .content("{ \"name\":\"Minas Gerais\", \"idCountry\":1 }")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON);
+        final var resultCreated = mvc.perform(builder).andExpect(status().isOk()).andReturn();
+        assertEquals("Success create country state",
+                resultCreated.getResponse().getContentAsString(),
+                "Invalid message return");
+    }
+
+    @Test
+    @Order(10)
+    @DisplayName("create a new coupon")
+    void testCouponOne() throws Exception {
+        final var validate = LocalDateTime.now().plusMonths(1);
+        final var builder = post(URL_COUPON)
+                .content("{ \"code\":\"123-123\", \"discount\":0.35, \"validate\":\""+validate.format(DATE_FORMAT)+"\" }")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON);
+        final var resultCreated = mvc.perform(builder).andExpect(status().isOk()).andReturn();
+        assertEquals("Success create coupon",
+                resultCreated.getResponse().getContentAsString(),
+                "Invalid message return");
+    }
+
+    @Test
+    @Order(11)
+    @DisplayName("create a new purchase")
+    void testPurchaseOne() throws Exception {
+        final var builder = post(URL_PURCHASE)
+                .content("{ \"email\":\"vinicius@mock.com\", \"firstName\":\"Vinicius\", \"lastName\":\"Faria\", " +
+                        "\"document\":\"350.480.770-91\", \"address\":\"Rua One\", \"complement\":\"number 31\"," +
+                        "\"city\":\"uberlandia\", \"idCountry\":1, \"idCountryState\":1, " +
+                        "\"phone\":34999999999, \"cep\":12345123, \"idCoupon\":1, " +
+                        "\"newCart\": { \"total\": 35.00, \"newItems\": [{\"idBook\":1, \"quantity\":1 }] } }")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON);
+        final var resultCreated = mvc.perform(builder).andExpect(status().isCreated()).andReturn();
+        assertEquals("/api/purchase/1",
+                resultCreated.getResponse().getContentAsString(),
+                "Invalid message return");
+    }
+
+    @Test
+    @Order(12)
+    @DisplayName("find a purchase by id")
+    void testPurchaseTwo() throws Exception {
+        final var builder = get(URL_PURCHASE+"/1")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON);
+        final var resultFind = mvc.perform(builder).andExpect(status().isOk()).andReturn();
+        assertFalse(resultFind.getResponse().getContentAsString().isBlank(), "Return purchase by id");
     }
 }
