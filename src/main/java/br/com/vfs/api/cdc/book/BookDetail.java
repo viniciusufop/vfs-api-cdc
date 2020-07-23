@@ -1,9 +1,7 @@
 package br.com.vfs.api.cdc.book;
 
 import br.com.vfs.api.cdc.author.AuthorDetail;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 

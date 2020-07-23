@@ -1,7 +1,6 @@
 package br.com.vfs.api.cdc.shared.annotations;
 
 import br.com.vfs.api.cdc.shared.validator.ExistElementValidator;
-import br.com.vfs.api.cdc.shared.validator.UniqueValueValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
