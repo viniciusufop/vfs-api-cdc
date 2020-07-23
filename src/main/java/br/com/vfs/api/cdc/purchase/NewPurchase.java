@@ -57,9 +57,7 @@ public class NewPurchase {
                             final CouponRepository couponRepository){
         final var country = countryRepository.findById(idCountry)
                 .orElseThrow(()-> new IllegalArgumentException("country not found"));
-        final var countryStateOptional = findCountryState(countryStateRepository);
-        final var coupon = couponRepository.findById(idCoupon)
-                .orElseThrow(()-> new IllegalArgumentException("coupon not found"));
+
         final var purchase = Purchase.builder()
                 .email(email)
                 .firstName(firstName)
@@ -72,9 +70,16 @@ public class NewPurchase {
                 .phone(phone)
                 .cep(cep)
                 .items(newCart.getModel(bookRepository))
-                .coupon(coupon)
                 .build();
+
+        final var countryStateOptional = findCountryState(countryStateRepository);
         countryStateOptional.ifPresent(purchase::setCountryState);
+
+        if(Objects.nonNull(idCoupon)){
+            final var couponOptional = couponRepository.findById(idCoupon);
+            couponOptional.ifPresent(purchase::setCoupon);
+        }
+
         return purchase;
     }
 

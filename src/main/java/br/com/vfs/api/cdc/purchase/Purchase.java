@@ -23,6 +23,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -71,5 +72,11 @@ public class Purchase {
     public void setCountryState(CountryState countryState) {
         Assert.isTrue(countryState.countryStateIsACountry(country.getId()), "Country state not associate a Country");
         this.countryState = countryState;
+    }
+
+    public void setCoupon(Coupon coupon) {
+        Assert.isTrue(Objects.isNull(id), "Purchase registered in database");
+        Assert.isTrue(Objects.nonNull(coupon), "Purchase has a coupon");
+        this.coupon = coupon;
     }
 }
